@@ -8,6 +8,7 @@ import { es } from "date-fns/locale/es";
 import Swal from "sweetalert2";
 import "./CalendarModal.css";
 import { useCalendarStore, useUiStore } from "../../hooks";
+import { getEnvVariables } from "../../helpers";
 
 registerLocale("es", es);
 
@@ -21,8 +22,9 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-
-Modal.setAppElement("#root");
+if (getEnvVariables().VITE_MODE !== "test") {
+  Modal.setAppElement("#root");
+}
 
 export const CalendarModal = () => {
   const { isDateModalOpen, closeDateModal } = useUiStore();
